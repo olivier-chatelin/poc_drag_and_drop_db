@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+ <ul>
+ {% for dish in dishes %}
+  <li>{{ dish.name }} / {{ dish.category }}</li>
+ {% endfor %}
+ </ul>
+ <ul>
+ {% for day in days %}
+   <li>{{ day.date|date('d/m/Y', "Europe/Paris")}}</li>
+     <ul>
+       {% for meal in day.meals %}
+         <li>{{ meal.category }}</li>
+       {% endfor %}
+     </ul>
+ {% endfor %}
+
+ </ul>
+{% endblock %}

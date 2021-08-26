@@ -34,9 +34,15 @@ class Dish
      */
     private $meals;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=DishList::class, mappedBy="dishes")
+     */
+    private $dishLists;
+
     public function __construct()
     {
         $this->meals = new ArrayCollection();
+        $this->dishLists = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -90,6 +96,33 @@ class Dish
     {
         if ($this->meals->removeElement($meal)) {
             $meal->removeDish($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|DishList[]
+     */
+    public function getDishLists(): Collection
+    {
+        return $this->dishLists;
+    }
+
+    public function addDishList(DishList $dishList): self
+    {
+        if (!$this->dishLists->contains($dishList)) {
+            $this->dishLists[] = $dishList;
+            $dishList->addDish($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDishList(DishList $dishList): self
+    {
+        if ($this->dishLists->removeElement($dishList)) {
+            $dishList->removeDish($this);
         }
 
         return $this;
