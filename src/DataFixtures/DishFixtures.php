@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 use App\Entity\Dish;
 use App\Entity\DishList;
+use App\Entity\Meal;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -10,8 +11,11 @@ class DishFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-       $dishList = new DishList();
-       $dishList->setName('Liste 1');
+        $dishList = new Meal();
+        $dishList->setCategory('list');
+        $dishList->setName('current');
+        $dishList->setIsFavourite(false);
+        $manager->persist($dishList);
        $dish = new Dish();
        $dish->setName('Blanquette de veau');
        $dish->setCategory('plat');

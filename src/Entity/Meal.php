@@ -22,7 +22,7 @@ class Meal
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $Category;
+    private $Category ='meal';
 
     /**
      * @ORM\ManyToMany(targetEntity=Dish::class, inversedBy="meals")
@@ -33,6 +33,21 @@ class Meal
      * @ORM\ManyToOne(targetEntity=Day::class, inversedBy="Meals")
      */
     private $day;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $period;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isFavourite = true;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $name;
 
     public function __construct()
     {
@@ -88,6 +103,42 @@ class Meal
     public function setDay(?Day $day): self
     {
         $this->day = $day;
+
+        return $this;
+    }
+
+    public function getPeriod(): ?string
+    {
+        return $this->period;
+    }
+
+    public function setPeriod(?string $period): self
+    {
+        $this->period = $period;
+
+        return $this;
+    }
+
+    public function getIsFavourite(): ?bool
+    {
+        return $this->isFavourite;
+    }
+
+    public function setIsFavourite(bool $isFavourite): self
+    {
+        $this->isFavourite = $isFavourite;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(?string $name): self
+    {
+        $this->name = $name;
 
         return $this;
     }

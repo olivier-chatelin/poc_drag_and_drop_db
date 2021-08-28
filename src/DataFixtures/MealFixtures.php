@@ -10,13 +10,14 @@ class MealFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
+
         for($i = 1; $i <= 7; $i++){
             $lunch = new Meal();
-            $lunch->setCategory('Déjeuner');
+            $lunch->setPeriod('Déjeuner');
             $manager->persist($lunch);
             $this->addReference('lunch_' . $i, $lunch);
             $dinner = new Meal();
-            $dinner->setCategory('Dîner');
+            $dinner->setPeriod('Dîner');
             $manager->persist($dinner);
             $this->addReference('dinner_' . $i, $dinner);
         }

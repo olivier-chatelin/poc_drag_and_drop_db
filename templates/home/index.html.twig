@@ -1,22 +1,47 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}List Dispatch{% endblock %}
 
 {% block body %}
- <ul>
- {% for dish in dishes %}
-  <li>{{ dish.name }} / {{ dish.category }}</li>
- {% endfor %}
- </ul>
- <ul>
- {% for day in days %}
-   <li>{{ day.date|date('d/m/Y', "Europe/Paris")}}</li>
-     <ul>
-       {% for meal in day.meals %}
-         <li>{{ meal.category }}</li>
-       {% endfor %}
-     </ul>
- {% endfor %}
+    <div class="container">
+        <div class="row">
+            <div class="col-6 dropzone d-flex flex-column align-items-center border" data-id={{ list.id }}>
+                <h2 class="text-center">Liste</h2>
+                {% for dish in list.dishes %}
+                    <p class="bg-{{dish.category == "entrée"? "success":"primary"}} text-white px-3 py-1 rounded-pill"
+                       data-id={{ dish.id }}
+                       data-origin-id="0"
+                       data-destination-id="0"
+                        draggable="true">
+                        {{ dish.name }}
+                    </p>
+                {% endfor %}
+            </div>
+            <div class="col-6">
+                <h2 class="text-center">Jours</h2>
+                {% for day in days %}
+                    <div class="border">
+                        <h3>
+                            {{ day.date|date("d/m/y") }}
+                        </h3>
+                        <div>
+                            {%  for meal in day.meals %}
+                            <div class=" dropzone d-flex flex-column align-items-center border" data-id={{ meal.id }}>
+                                <h4>{{ meal.period }}</h4>
+                                {% for dish in meal.dishes %}
+                                    <p class="bg-{{dish.category == "entrée"? "success":"primary"}} text-white px-3 py-1 rounded-pill"
+                                       draggable="true">
+                                        {{ dish.name }}
+                                    </p>
+                                {% endfor %}
+                            </div>
+                            {% endfor %}
 
- </ul>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
 {% endblock %}
