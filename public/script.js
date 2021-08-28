@@ -1,3 +1,5 @@
+
+
 let dragged;
 const dropZones = document.getElementsByClassName('dropzone');
 
@@ -5,9 +7,7 @@ const dropZones = document.getElementsByClassName('dropzone');
 const dragStart = (event) => {
     dragged = event.target;
     console.log("élément attrapé");
-    console.log(dragged.dataset.id);
     dragged.dataset.originId = dragged.parentNode.dataset.id;
-    console.log(dragged.dataset.originId);
 
 }
 const dragEnter = (event) => {
@@ -32,6 +32,26 @@ const drop = (event) => {
         event.target.appendChild(dragged);
         event.target.classList.remove('selected');
         dragged.classList.add('trembling');
+        dragged.dataset.destinationId = event.target.dataset.id;
+        console.log('id_dragged:',dragged.dataset.id);
+        console.log('id_origine:', dragged.dataset.originId);
+        console.log('id_destination:', dragged.dataset.destinationId);
+        //le fetch
+        fetch('/meal',{
+            body: JSON.stringify({
+                idDragged: dragged.dataset.id,
+                idOrigin: dragged.dataset.originId,
+                idDestination:dragged.dataset.destinationId
+            }),
+            method:"POST",
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+            .then((response)=>response.json())
+            .then((data)=>console.log(data));
+
+
     }
 
 }
