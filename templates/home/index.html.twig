@@ -8,7 +8,7 @@
             <div class="col-6 dropzone d-flex flex-column align-items-center border" data-id={{ list.id }}>
                 <h2 class="text-center">Liste </h2>
                 {% for dish in list.dishes %}
-                    <p class="bg-{{dish.category == "entrée"? "success":"primary"}} text-white px-3 py-1 rounded-pill"
+                    <p class="bg-{{dish.category == "entrée"? "success":"primary"}} draggable text-white px-3 py-1 rounded-pill"
                        data-id={{ dish.id }}
                        data-origin-id="0"
                        data-destination-id="0"
@@ -29,7 +29,7 @@
                             <div class=" dropzone d-flex flex-column align-items-center border" data-id={{ meal.id }}>
                                 <h4>{{ meal.period }} </h4>
                                 {% for dish in meal.dishes %}
-                                    <p class="bg-{{dish.category == "entrée"? "success":"primary"}} text-white px-3 py-1 rounded-pill"
+                                    <p class="bg-{{dish.category == "entrée"? "success":"primary"}} draggable text-white px-3 py-1 rounded-pill"
                                        data-id={{ dish.id }}
                                        data-origin-id="0"
                                        data-destination-id="0"

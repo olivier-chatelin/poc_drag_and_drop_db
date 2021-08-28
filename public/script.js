@@ -2,6 +2,7 @@
 
 let dragged;
 const dropZones = document.getElementsByClassName('dropzone');
+const draggables = document.getElementsByClassName('draggable');
 
 
 const dragStart = (event) => {
@@ -10,6 +11,7 @@ const dragStart = (event) => {
     dragged.dataset.originId = dragged.parentNode.dataset.id;
 
 }
+
 const dragEnter = (event) => {
     if (event.target.classList.contains("dropzone")){
         event.target.classList.add("selected");
@@ -55,6 +57,7 @@ const drop = (event) => {
     }
 
 }
+
 for (const dropZone of dropZones) {
     dropZone.addEventListener('dragenter', dragEnter);
     dropZone.addEventListener('dragleave', dragLeave);
@@ -64,4 +67,8 @@ for (const dropZone of dropZones) {
 document.addEventListener('dragstart', dragStart);
 document.addEventListener('dragend',dragEnd);
 document.addEventListener('drop', drop);
+
+
+
+
 
